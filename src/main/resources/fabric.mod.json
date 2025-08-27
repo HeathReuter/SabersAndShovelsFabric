@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "sas",
+  "version": "${version}",
+  "name": "Sabers And Shovels [Fabric]",
+  "description": "This is a simple mod for my personal practice, inspired by rare sword from The Witcher",
+  "authors": ["heathreuter"],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/sas/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "dev.heathreuter.sas.client.SasClient"
+    ],
+    "main": [
+      "dev.heathreuter.sas.Sas"
+    ]
+  },
+  "mixins": [
+    "sas.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
