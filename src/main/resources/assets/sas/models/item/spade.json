@@ -1,0 +1,6 @@
+{
+  "parent": "sas:item/template_spade",
+  "textures": {
+    "layer0": "sas:item/spade"
+  }
+}
