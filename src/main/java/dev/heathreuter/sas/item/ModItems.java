@@ -14,6 +14,9 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.EnchantableComponent;
+
 
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -26,10 +29,15 @@ public class ModItems {
                         Identifier.of(Sas.MOD_ID,name)))));
     }
 
+//LOGGER.info(String.valueOf(ModItems.R
+//.isEnchantable(ModItems.R.getDefaultStack())));
+
+//   component(DataComponentTypes.EQUIPMENT, EquipmentAssets.SWORD)
+//   .component(DataComponentTypes.ENCHANTABLE, EquipmentType.WEAPON)
+
     public static final Item IRIS = register(
             "iris",
             settings -> new Item(settings.sword(ModToolMaterials.SAS, 2, -2.4f)) {
-
                 @Override
                 public void appendTooltip(ItemStack stack, TooltipContext context,
                                           TooltipDisplayComponent displayComponent,
@@ -45,7 +53,6 @@ public class ModItems {
                     }
                     super.appendTooltip(stack, context, displayComponent, textConsumer, type);
                 }
-
             }
     );
 
