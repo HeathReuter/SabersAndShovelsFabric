@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "sas:iris"
+    "sas:iris",
+    "sas:spade"
   ]
 }

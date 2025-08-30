@@ -29,12 +29,6 @@ public class ModItems {
                         Identifier.of(Sas.MOD_ID,name)))));
     }
 
-//LOGGER.info(String.valueOf(ModItems.R
-//.isEnchantable(ModItems.R.getDefaultStack())));
-
-//   component(DataComponentTypes.EQUIPMENT, EquipmentAssets.SWORD)
-//   .component(DataComponentTypes.ENCHANTABLE, EquipmentType.WEAPON)
-
     public static final Item IRIS = register(
             "iris",
             settings -> new Item(settings.sword(ModToolMaterials.SAS, 2, -2.4f)) {
