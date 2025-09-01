@@ -1,6 +1,7 @@
 package dev.heathreuter.sas.item;
 
 import dev.heathreuter.sas.Sas;
+import dev.heathreuter.sas.item.custom.SpadeItem;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.component.type.TooltipDisplayComponent;
@@ -14,9 +15,6 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.EnchantableComponent;
-
 
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -31,12 +29,11 @@ public class ModItems {
 
     public static final Item IRIS = register(
             "iris",
-            settings -> new Item(settings.sword(ModToolMaterials.SAS, 2, -2.4f)) {
+            settings -> new Item(settings.sword(ModToolMaterials.SAS, 0, -2.4f)) {
                 @Override
                 public void appendTooltip(ItemStack stack, TooltipContext context,
                                           TooltipDisplayComponent displayComponent,
                                           Consumer<Text> textConsumer, TooltipType type) {
-
                     if (Screen.hasShiftDown()) {
                         textConsumer.accept(Text.translatable("tooltip.sas.iris.shift_down_1"));
                         textConsumer.accept(Text.translatable("tooltip.sas.iris.shift_down_2"));
@@ -52,7 +49,7 @@ public class ModItems {
 
     public static final Item SPADE = register(
             "spade",
-            settings -> new Item(settings.sword(ModToolMaterials.SAS, 3, -2.4f)) {
+            settings -> new SpadeItem(settings.shovel(ModToolMaterials.SAS, 5, -3.0f)){
                 @Override
                 public void appendTooltip(ItemStack stack, TooltipContext context,
                                           TooltipDisplayComponent displayComponent,
