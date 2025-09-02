@@ -8,5 +8,5 @@
   "tooltip.sas.iris.shift_down_3": "§ewill release this energy in a powerful strike,",
   "tooltip.sas.iris.shift_down_4": "§eat the cost of part of the attacker's Health.",
 
-  "tooltip.sas.spade": "§e+10% of damage dealt heal you"
+  "tooltip.sas.spade": "§eEach critical hit heals the owner for 2 hp"
 }
