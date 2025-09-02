@@ -16,7 +16,6 @@ public class SpadeItem extends Item {
         if (attacker instanceof PlayerEntity player) {
             float damage = target.getMaxHealth() - target.getHealth();
             if (damage > 0f) {
-                float heal = damage * 0.10f;
                 player.heal(2);
             }
         }
