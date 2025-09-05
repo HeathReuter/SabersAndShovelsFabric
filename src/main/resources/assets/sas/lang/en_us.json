@@ -2,7 +2,8 @@
   "item.sas.iris": "§6Iris",
   "item.sas.spade": "§6Spade",
 
-  "tooltip.sas.iris": "Press §eShift§r for more Information",
+  "tooltip.sas.iris_1": "§eSwings back if you hold it down",
+  "tooltip.sas.iris_2": "Press §eShift§r for more Information",
   "tooltip.sas.iris.shift_down_1": "§eWeapon charges with energy during combat.",
   "tooltip.sas.iris.shift_down_2": "§eWhen, its color changes to red, a strong attack",
   "tooltip.sas.iris.shift_down_3": "§ewill release this energy in a powerful strike,",

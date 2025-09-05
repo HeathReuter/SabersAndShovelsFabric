@@ -40,7 +40,8 @@ public class ModItems {
                         textConsumer.accept(Text.translatable("tooltip.sas.iris.shift_down_3"));
                         textConsumer.accept(Text.translatable("tooltip.sas.iris.shift_down_4"));
                     } else {
-                        textConsumer.accept(Text.translatable("tooltip.sas.iris"));
+                        textConsumer.accept(Text.translatable("tooltip.sas.iris_1"));
+                        textConsumer.accept(Text.translatable("tooltip.sas.iris_2"));
                     }
                     super.appendTooltip(stack, context, displayComponent, textConsumer, type);
                 }
