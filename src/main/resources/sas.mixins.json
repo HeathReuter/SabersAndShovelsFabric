@@ -7,6 +7,7 @@
     "ExampleMixin"
   ],
   "client": [
+    "client.HeldItemRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
