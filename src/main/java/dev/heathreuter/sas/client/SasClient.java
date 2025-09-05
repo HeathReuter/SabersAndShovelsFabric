@@ -12,10 +12,8 @@ public class SasClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        Sas.LOGGER.info("SAS client init");
         ClientPlayNetworking.registerGlobalReceiver(FlipSwingPayload.ID, (payload, context) -> {
             context.client().execute(() -> {
-                Sas.LOGGER.info("FlipSwingPayload received on client");
                 if (context.client().player != null) {
                     try {
                         context.client().player.swingHand(net.minecraft.util.Hand.MAIN_HAND, true);
