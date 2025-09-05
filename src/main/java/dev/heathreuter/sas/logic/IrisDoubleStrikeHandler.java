@@ -20,7 +20,6 @@ public final class IrisDoubleStrikeHandler {
     private static final List<Scheduled> tasks = new ArrayList<>();
 
     public static void init() {
-        Sas.LOGGER.info("IrisDoubleStrikeHandler.init()");
         ServerTickEvents.END_SERVER_TICK.register(IrisDoubleStrikeHandler::tick);
 
         ServerLivingEntityEvents.AFTER_DAMAGE.register((target, source, amount, taken, blocked) -> {
@@ -34,13 +33,11 @@ public final class IrisDoubleStrikeHandler {
             if (server == null) return;
             int now = server.getTicks();
             Integer last = lockout.get(player.getUuid());
-            if (last != null && now - last < 20) return; // защита от частых спамов
+            if (last != null && now - last < 20) return;
             lockout.put(player.getUuid(), now);
 
-            Sas.LOGGER.info("Iris hit by {} on {} — scheduling double strike", player.getName().getString(), target.getType().getName().getString());
-
-            schedule(server, 4, () -> {
-                try {
+            schedule(server, 4, () -> runSilently(()->
+            {
                     if (!player.isAlive() || !target.isAlive()) return;
                     if (player.squaredDistanceTo(target) > 9.0) return;
 
@@ -49,7 +46,6 @@ public final class IrisDoubleStrikeHandler {
 
                     double damage = player.getAttributeValue(EntityAttributes.ATTACK_DAMAGE);
 
-                    Sas.LOGGER.info("Applying second damage {} to {}", damage, target.getType().getName().getString());
 
                     target.damage(
                         (ServerWorld) target.getWorld(),
@@ -59,13 +55,13 @@ public final class IrisDoubleStrikeHandler {
 
                     if (player instanceof ServerPlayerEntity sp) {
                         ServerPlayNetworking.send(sp, new FlipSwingPayload());
-                        Sas.LOGGER.info("Sent FlipSwingPayload to {}", sp.getName().getString());
                     }
-                } catch (Exception e) {
-                    Sas.LOGGER.error("Error during scheduled iris double strike", e);
-                }
-            });
+            }));
         });
+    }
+
+    public static void runSilently(Runnable r) {
+        try { r.run(); } catch (Exception ignored) {}
     }
 
     private static final class Scheduled { int runAt; Runnable task; }
