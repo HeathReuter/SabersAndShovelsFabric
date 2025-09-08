@@ -6,7 +6,8 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 public class SasClientPackets {
     public static void register() {
         ClientPlayNetworking.registerGlobalReceiver(GreenGlowPayload.ID, (payload, context) -> {
-            context.client().execute(() -> SasClientState.greenGlowTicks = 10);
+            var self = GreenGlowClientState.getSelfUuid();
+            if (self != null) GreenGlowClientState.enableGlow(self);
         });
     }
 }

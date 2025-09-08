@@ -12,11 +12,12 @@ import net.minecraft.client.render.entity.PlayerEntityRenderer;
 public class SasClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        GreenGlowClientState.init();
         ClientTickEvents.END_CLIENT_TICK.register(client -> SasClientState.clientTick());
 
-        LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, renderer, registrationHelper, context) -> {
-            if (renderer instanceof PlayerEntityRenderer playerRenderer) {
-                registrationHelper.register(new GreenGlintRenderLayer(playerRenderer));
+        LivingEntityFeatureRendererRegistrationCallback.EVENT.register((type, renderer, helper, ctx) -> {
+            if (type == EntityType.PLAYER) {
+                helper.register(new GreenGlintFeatureRenderer<>(renderer));
             }
         });
     }
