@@ -20,13 +20,14 @@ public final class IrisDoubleStrikeHandler {
     private static final List<Scheduled> tasks = new ArrayList<>();
 
     private static void sweepLockout(int now) {
-        lockout.entrySet().removeIf(e -> now - e.getValue() > 200); // старше 10 сек
+        lockout.entrySet().removeIf(e -> now - e.getValue() > 200);
     }
 
     public static void init() {
         ServerTickEvents.END_SERVER_TICK.register(IrisDoubleStrikeHandler::tick);
 
-        ServerLivingEntityEvents.AFTER_DAMAGE.register((target, source, amount, taken, blocked) -> {
+        ServerLivingEntityEvents.AFTER_DAMAGE.register((target, source,
+                                                        amount, taken, blocked) -> {
             if (blocked || taken <= 0) return;
             if (!(source.getAttacker() instanceof PlayerEntity player)) return;
 
@@ -43,7 +44,7 @@ public final class IrisDoubleStrikeHandler {
             schedule(server, 4, () -> runSilently(() -> {
                 if (!player.isAlive() || !target.isAlive()) return;
                 if (player.getWorld() != target.getWorld()) return;
-                if (player.squaredDistanceTo(target) > 9.0) return;
+                if (player.squaredDistanceTo(target) > 10.0) return;
 
                 target.hurtTime = 0;
                 target.timeUntilRegen = 0;
@@ -80,7 +81,7 @@ public final class IrisDoubleStrikeHandler {
             if (s.runAt <= t) {
                 try {
                     s.task.run();
-                } catch (Exception e) { // ← было Throwable
+                } catch (Exception e) {
                     Sas.LOGGER.error("task error", e);
                 }
                 return true;

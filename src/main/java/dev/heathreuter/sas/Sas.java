@@ -1,7 +1,9 @@
 package dev.heathreuter.sas;
 
+import dev.heathreuter.sas.effect.ModEffects;
 import dev.heathreuter.sas.logic.IrisDoubleStrikeHandler;
 import dev.heathreuter.sas.network.FlipSwingPayload;
+import dev.heathreuter.sas.network.GreenGlowPayload;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import org.slf4j.Logger;
@@ -18,7 +20,10 @@ public class Sas implements ModInitializer {
         ModItems.registerModItems();
 
         PayloadTypeRegistry.playS2C().register(FlipSwingPayload.ID, FlipSwingPayload.CODEC);
+        PayloadTypeRegistry.playS2C().register(GreenGlowPayload.ID, GreenGlowPayload.CODEC);
 
         IrisDoubleStrikeHandler.init();
+
+        ModEffects.registerEffects();
     }
 }
