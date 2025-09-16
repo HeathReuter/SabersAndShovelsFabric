@@ -1,6 +1,6 @@
 package dev.heathreuter.sas.mixin.client;
 
-import dev.heathreuter.sas.client.SasClientState;
+import dev.heathreuter.sas.client.IrisClientState;
 import dev.heathreuter.sas.item.ModItems;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -25,10 +25,10 @@ public abstract class HeldItemRendererMixin {
                                    float swingProgress, ItemStack stack, float equipProgress,
                                    MatrixStack matrices, VertexConsumerProvider vcp, int light,
                                    CallbackInfo ci) {
-        if (SasClientState.flipNextSwing && hand == Hand.MAIN_HAND && stack.isOf(ModItems.IRIS)) {
-            matrices.translate(-0.4F, 0.0F, 0.0F);
+        if (IrisClientState.flipNextSwing && hand == Hand.MAIN_HAND && stack.isOf(ModItems.IRIS)) {
             matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-90.0F));
-            SasClientState.flipNextSwing = false;
+            matrices.translate(-0.4F, 0.0F, 0.0F);
+            IrisClientState.flipNextSwing = false;
         }
     }
 }
