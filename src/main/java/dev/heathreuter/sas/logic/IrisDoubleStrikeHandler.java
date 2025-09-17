@@ -19,6 +19,10 @@ public final class IrisDoubleStrikeHandler {
     private static final Map<UUID, Integer> lockout = new HashMap<>();
     private static final List<Scheduled> tasks = new ArrayList<>();
 
+    private static void sweepLockout(int now) {
+        lockout.entrySet().removeIf(e -> now - e.getValue() > 200); // старше 10 сек
+    }
+
     public static void init() {
         ServerTickEvents.END_SERVER_TICK.register(IrisDoubleStrikeHandler::tick);
 
@@ -36,26 +40,22 @@ public final class IrisDoubleStrikeHandler {
             if (last != null && now - last < 20) return;
             lockout.put(player.getUuid(), now);
 
-            schedule(server, 4, () -> runSilently(()->
-            {
-                    if (!player.isAlive() || !target.isAlive()) return;
-                    if (player.squaredDistanceTo(target) > 9.0) return;
+            schedule(server, 4, () -> runSilently(() -> {
+                if (!player.isAlive() || !target.isAlive()) return;
+                if (player.getWorld() != target.getWorld()) return;
+                if (player.squaredDistanceTo(target) > 10.0) return;
 
-                    target.hurtTime = 0;
-                    target.timeUntilRegen = 0;
+                target.hurtTime = 0;
+                target.timeUntilRegen = 0;
 
-                    double damage = player.getAttributeValue(EntityAttributes.ATTACK_DAMAGE);
+                double damage = player.getAttributeValue(EntityAttributes.ATTACK_DAMAGE);
+                ServerWorld sw = (ServerWorld) target.getWorld();
 
+                target.damage(sw, player.getDamageSources().playerAttack(player), (float) damage);
 
-                    target.damage(
-                        (ServerWorld) target.getWorld(),
-                        player.getDamageSources().playerAttack(player),
-                        (float) damage
-                    );
-
-                    if (player instanceof ServerPlayerEntity sp) {
-                        ServerPlayNetworking.send(sp, new FlipSwingPayload());
-                    }
+                if (player instanceof ServerPlayerEntity sp) {
+                    ServerPlayNetworking.send(sp, new FlipSwingPayload());
+                }
             }));
         });
     }
@@ -75,9 +75,14 @@ public final class IrisDoubleStrikeHandler {
 
     private static void tick(MinecraftServer server) {
         int t = server.getTicks();
+        sweepLockout(t);
         tasks.removeIf(s -> {
             if (s.runAt <= t) {
-                try { s.task.run(); } catch (Throwable e) { Sas.LOGGER.error("task error", e); }
+                try {
+                    s.task.run();
+                } catch (Exception e) { // ← было Throwable
+                    Sas.LOGGER.error("task error", e);
+                }
                 return true;
             }
             return false;
