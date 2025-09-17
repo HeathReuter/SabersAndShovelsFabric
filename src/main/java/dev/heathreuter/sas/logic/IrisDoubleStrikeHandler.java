@@ -43,7 +43,7 @@ public final class IrisDoubleStrikeHandler {
             schedule(server, 4, () -> runSilently(() -> {
                 if (!player.isAlive() || !target.isAlive()) return;
                 if (player.getWorld() != target.getWorld()) return;
-                if (player.squaredDistanceTo(target) > 9.0) return;
+                if (player.squaredDistanceTo(target) > 10.0) return;
 
                 target.hurtTime = 0;
                 target.timeUntilRegen = 0;
