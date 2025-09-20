@@ -80,7 +80,7 @@ public final class IrisDoubleStrikeHandler {
             if (s.runAt <= t) {
                 try {
                     s.task.run();
-                } catch (Exception e) { // ← было Throwable
+                } catch (Exception e) {
                     Sas.LOGGER.error("task error", e);
                 }
                 return true;

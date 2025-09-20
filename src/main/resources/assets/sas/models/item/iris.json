@@ -2,5 +2,11 @@
   "parent": "sas:item/template_iris",
   "textures": {
     "layer0": "sas:item/iris"
-  }
+  },
+  "overrides": [
+    { "predicate": { "sas:charges": 0.25 }, "model": "sas:item/iris_1" },
+    { "predicate": { "sas:charges": 0.50 }, "model": "sas:item/iris_2" },
+    { "predicate": { "sas:charges": 0.75 }, "model": "sas:item/iris_3" },
+    { "predicate": { "sas:charges": 1.00 }, "model": "sas:item/iris_4" }
+  ]
 }

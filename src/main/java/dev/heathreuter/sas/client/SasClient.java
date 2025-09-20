@@ -1,6 +1,5 @@
 package dev.heathreuter.sas.client;
 
-import dev.heathreuter.sas.Sas;
 import dev.heathreuter.sas.network.FlipSwingPayload;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -12,6 +11,7 @@ public class SasClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+
         ClientPlayNetworking.registerGlobalReceiver(FlipSwingPayload.ID, (payload, context) -> {
             context.client().execute(() -> {
                 if (context.client().player != null) {

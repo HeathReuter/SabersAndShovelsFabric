@@ -1,0 +1,6 @@
+{
+  "parent": "sas:item/template_iris",
+  "textures": {
+    "layer0": "sas:item/iris_2"
+  }
+}
