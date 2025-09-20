@@ -4,21 +4,26 @@ import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 
+import java.util.Optional;
+
+import static java.util.Optional.of;
+
 public class IrisData {
-    public static int getCharges(ItemStack stack) {
+    public static Optional<Integer> getCharges(ItemStack stack) {
         NbtCompound tag = getTag(stack);
-        return tag.getInt("charges").get();
+        return tag.getInt("charges");
     }
 
     public static void setCharges(ItemStack stack, int value) {
         NbtCompound tag = getTag(stack);
         tag.putInt("charges", value);
+        tag.putInt("CustomModelData", value);
         saveTag(stack, tag);
     }
 
-    public static long getLastHitTime(ItemStack stack) {
+    public static Optional<Long> getLastHitTime(ItemStack stack) {
         NbtCompound tag = getTag(stack);
-        return tag.getLong("last_hit_time").get();
+        return tag.getLong("last_hit_time");
     }
 
     public static void setLastHitTime(ItemStack stack, long time) {

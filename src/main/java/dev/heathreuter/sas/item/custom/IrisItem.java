@@ -7,6 +7,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 
+import java.util.Optional;
+
 public class IrisItem extends Item {
     public IrisItem(Settings settings) {
         super(settings);
@@ -17,17 +19,15 @@ public class IrisItem extends Item {
         if (attacker instanceof PlayerEntity player) {
 
             long now = player.getWorld().getTime();
-            long last = IrisData.getLastHitTime(stack);
+            long last = IrisData.getLastHitTime(stack).orElse(0L);
+            int charges = IrisData.getCharges(stack).orElse(0);
 
             if (now - last > 240) {
-
-                IrisData.setCharges(stack, 0);
+                charges = 0;
             }
 
-            int charges = IrisData.getCharges(stack);
-
             if (charges < 4) {
-                IrisData.setCharges(stack, charges + 1);
+                IrisData.setCharges(stack, charges);
                 IrisData.setLastHitTime(stack, now);
 
             } else {
@@ -36,6 +36,7 @@ public class IrisItem extends Item {
                     player.damage(sw, player.getDamageSources().generic(), 2.0f);
                 }
                 IrisData.setCharges(stack, 0);
+                IrisData.setLastHitTime(stack, now);
             }
         }
     }
