@@ -1,6 +1,7 @@
 package dev.heathreuter.sas.item.custom;
 
 import dev.heathreuter.sas.component.IrisData;
+import dev.heathreuter.sas.logic.IrisChargeScheduler;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -26,12 +27,14 @@ public class IrisItem extends Item {
                 charges = 0;
             }
 
-            if (charges < 4) {
+            if (charges <= 4) {
                 IrisData.setCharges(stack, charges + 1);
                 IrisData.setLastHitTime(stack, now);
+
+                IrisChargeScheduler.scheduleReset(stack, now);
+
                 player.getInventory().markDirty();
                 player.playerScreenHandler.sendContentUpdates();
-
             } else {
                 if (target.getWorld() instanceof ServerWorld sw) {
                     target.damage(sw, player.getDamageSources().playerAttack(player), 7.5f);
