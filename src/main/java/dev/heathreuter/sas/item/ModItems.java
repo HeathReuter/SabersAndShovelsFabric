@@ -1,6 +1,7 @@
 package dev.heathreuter.sas.item;
 
 import dev.heathreuter.sas.Sas;
+import dev.heathreuter.sas.item.custom.IrisItem;
 import dev.heathreuter.sas.item.custom.SpadeItem;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.client.gui.screen.Screen;
@@ -29,9 +30,10 @@ public class ModItems {
 
     public static final Item IRIS = register(
             "iris",
-            settings -> new Item(settings.sword(ModToolMaterials.SAS, 0, -2.4f)) {
+            settings -> new IrisItem(settings.sword(ModToolMaterials.SAS, 0, -2.4f)) {
+
                 @Override
-                public void appendTooltip(ItemStack stack, TooltipContext context,
+                public void appendTooltip(ItemStack stack, Item.TooltipContext context,
                                           TooltipDisplayComponent displayComponent,
                                           Consumer<Text> textConsumer, TooltipType type) {
                     if (Screen.hasShiftDown()) {
