@@ -44,6 +44,18 @@ public class IrisData {
         saveTag(stack, tag);
     }
 
+    public static Optional<Long> getExpireTime(ItemStack stack) {
+        NbtCompound tag = getTag(stack);
+        return tag.getLong("iris_expire");
+    }
+
+    public static void setExpireTime(ItemStack stack, long time) {
+        NbtCompound tag = getTag(stack);
+        tag.putLong("iris_expire", time);
+        saveTag(stack, tag);
+    }
+
+
     private static NbtCompound getTag(ItemStack stack) {
         var data = stack.getOrDefault(DataComponentTypes.CUSTOM_DATA,
                 net.minecraft.component.type.NbtComponent.of(new NbtCompound()));

@@ -1,6 +1,6 @@
 package dev.heathreuter.sas;
 
-import dev.heathreuter.sas.logic.IrisChargeScheduler;
+import dev.heathreuter.sas.logic.IrisChargeTicker;
 import dev.heathreuter.sas.logic.IrisDoubleStrikeHandler;
 import dev.heathreuter.sas.network.FlipSwingPayload;
 import net.fabricmc.api.ModInitializer;
@@ -21,6 +21,6 @@ public class Sas implements ModInitializer {
         PayloadTypeRegistry.playS2C().register(FlipSwingPayload.ID, FlipSwingPayload.CODEC);
 
         IrisDoubleStrikeHandler.init();
-        IrisChargeScheduler.init();
+        IrisChargeTicker.init();
     }
 }
