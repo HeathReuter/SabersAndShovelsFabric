@@ -17,7 +17,7 @@ public class IrisData {
     public static void setCharges(ItemStack stack, int value) {
         NbtCompound tag = getTag(stack);
         tag.putInt("charges", value);
-        tag.putInt("CustomModelData", value);
+        tag.putInt("custom_model_data", value);
         saveTag(stack, tag);
     }
 

@@ -1,40 +1,40 @@
 {
   "model": {
-    "type": "select",
-    "property": "custom_model_data",
+    "type": "minecraft:select",
+    "property": "minecraft:custom_model_data",
+    "fallback": {
+      "type": "model",
+      "model": "sas:item/iris"
+    },
     "cases": [
       {
-        "when": 1,
+        "when": "1",
         "model": {
           "type": "model",
           "model": "sas:item/iris_1"
         }
       },
       {
-        "when": 2,
+        "when": "2",
         "model": {
           "type": "model",
           "model": "sas:item/iris_2"
         }
       },
       {
-        "when": 3,
+        "when": "3",
         "model": {
           "type": "model",
           "model": "sas:item/iris_3"
         }
       },
       {
-        "when": 4,
+        "when": "4",
         "model": {
           "type": "model",
           "model": "sas:item/iris_4"
         }
       }
-    ],
-    "fallback": {
-      "type": "model",
-      "model": "sas:item/iris"
-    }
+    ]
   }
 }
