@@ -20,12 +20,7 @@ public class IrisItem extends Item {
         if (attacker instanceof PlayerEntity player) {
 
             long now = player.getWorld().getTime();
-            long last = IrisData.getLastHitTime(stack).orElse(0L);
             int charges = IrisData.getCharges(stack).orElse(0);
-
-            if (now - last > 240) {
-                charges = 0;
-            }
 
             if (charges <= 4) {
                 IrisData.setCharges(stack, charges + 1);
