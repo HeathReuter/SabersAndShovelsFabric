@@ -27,8 +27,10 @@ public class IrisItem extends Item {
             }
 
             if (charges < 4) {
-                IrisData.setCharges(stack, charges);
+                IrisData.setCharges(stack, charges + 1);
                 IrisData.setLastHitTime(stack, now);
+                player.getInventory().markDirty();
+                player.playerScreenHandler.sendContentUpdates();
 
             } else {
                 if (target.getWorld() instanceof ServerWorld sw) {
@@ -37,6 +39,8 @@ public class IrisItem extends Item {
                 }
                 IrisData.setCharges(stack, 0);
                 IrisData.setLastHitTime(stack, now);
+                player.getInventory().markDirty();
+                player.playerScreenHandler.sendContentUpdates();
             }
         }
     }
