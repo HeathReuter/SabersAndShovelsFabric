@@ -17,6 +17,7 @@ public class IrisData {
         NbtCompound tag = getTag(stack);
         return tag.getInt("charges");
     }
+
     public static void setCharges(ItemStack stack, int value) {
         NbtCompound tag = getTag(stack);
         tag.putInt("charges", value);
